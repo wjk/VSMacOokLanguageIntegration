@@ -33,7 +33,7 @@ namespace OokLanguage
         public OokE()
         {
             DisplayName = "ook!"; //human readable version of the name
-            ForegroundColor = Colors.BlueViolet;
+            ForegroundBrush = new SolidColorBrush(Colors.BlueViolet);
         }
     }
 
@@ -53,7 +53,7 @@ namespace OokLanguage
         public OokQ()
         {
             DisplayName = "ook?"; //human readable version of the name
-            ForegroundColor = Colors.Green;
+            ForegroundBrush = new SolidColorBrush(Colors.Green);
         }
     }
 
@@ -73,7 +73,7 @@ namespace OokLanguage
         public OokP()
         {
             DisplayName = "ook."; //human readable version of the name
-            ForegroundColor = Colors.Orange;
+            ForegroundBrush = new SolidColorBrush(Colors.Orange);
         }
     }
     #endregion //Format definition
