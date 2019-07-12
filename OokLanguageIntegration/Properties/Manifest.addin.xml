@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ExtensionModel>
+    <Extension path="/MonoDevelop/Core/MimeTypes">
+        <MimeType id="text/x-ook" contentType="ook!" isText="true">
+            <File pattern="*.ook" />
+        </MimeType>
+    </Extension>
+    
+    <Extension path="/MonoDevelop/TextEditor/SupportedFileTypes">
+        <SupportedFileType id="Ook" mimeTypes="text/x-ook" extensions=".ook" />
+    </Extension>
+    
+    <Extension path="/MonoDevelop/Ide/Composition">
+        <Assembly file="OokLanguageIntegration.dll" />
+    </Extension>
+</ExtensionModel>

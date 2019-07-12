@@ -1,0 +1,22 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net472</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="MonoDevelop.Addins" Version="0.4.7" />
+    <PackageReference Include="Microsoft.VisualStudio.Language.StandardClassification" Version="16.1.89" />
+    <PackageReference Include="Microsoft.VisualStudio.Text.Data" Version="16.1.89" />
+    <PackageReference Include="Microsoft.VisualStudio.Text.UI" Version="16.1.89" />
+    <PackageReference Include="Microsoft.VisualStudio.Text.UI.Wpf" Version="16.1.89" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <AddinReference Include="MonoDevelop.DesignerSupport" />
+    <AddinReference Include="MonoDevelop.SourceEditor2" />
+    <AddinReference Include="MonoDevelop.DotNetCore" />
+    <AddinReference Include="MonoDevelop.PackageManagement" />
+    <AddinReference Include="MonoDevelop.TextEditor" />
+    <AddinReference Include="MonoDevelop.Refactoring" />
+  </ItemGroup>
+</Project>
