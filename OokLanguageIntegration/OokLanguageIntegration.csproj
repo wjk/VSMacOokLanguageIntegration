@@ -9,12 +9,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <AddinReference Include="MonoDevelop.DesignerSupport" />
-    <AddinReference Include="MonoDevelop.SourceEditor2" />
-    <AddinReference Include="MonoDevelop.DotNetCore" />
-    <AddinReference Include="MonoDevelop.PackageManagement" />
-    <AddinReference Include="MonoDevelop.TextEditor" />
     <AddinReference Include="MonoDevelop.TextEditor.Cocoa" />
-    <AddinReference Include="MonoDevelop.Refactoring" />
   </ItemGroup>
 </Project>
