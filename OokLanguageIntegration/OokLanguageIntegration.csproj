@@ -5,10 +5,10 @@
 
   <ItemGroup>
     <PackageReference Include="MonoDevelop.Addins" Version="0.4.7" />
-    <PackageReference Include="Microsoft.VisualStudio.Language.StandardClassification" Version="16.1.89" />
-    <PackageReference Include="Microsoft.VisualStudio.Text.Data" Version="16.1.89" />
-    <PackageReference Include="Microsoft.VisualStudio.Text.UI" Version="16.1.89" />
-    <PackageReference Include="Microsoft.VisualStudio.Text.UI.Wpf" Version="16.1.89" />
+    <PackageReference Include="Microsoft.VisualStudio.Language.StandardClassification" Version="16.4.280" />
+    <PackageReference Include="Microsoft.VisualStudio.Text.Data" Version="16.4.280" />
+    <PackageReference Include="Microsoft.VisualStudio.Text.UI" Version="16.4.280" />
+    <PackageReference Include="Microsoft.VisualStudio.Text.UI.Wpf" Version="16.4.280" />
   </ItemGroup>
 
   <ItemGroup>
