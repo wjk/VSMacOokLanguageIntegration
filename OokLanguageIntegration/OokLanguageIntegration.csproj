@@ -5,10 +5,7 @@
 
   <ItemGroup>
     <PackageReference Include="MonoDevelop.Addins" Version="0.4.7" />
-    <PackageReference Include="Microsoft.VisualStudio.Language.StandardClassification" Version="16.4.280" />
-    <PackageReference Include="Microsoft.VisualStudio.Text.Data" Version="16.4.280" />
-    <PackageReference Include="Microsoft.VisualStudio.Text.UI" Version="16.4.280" />
-    <PackageReference Include="Microsoft.VisualStudio.Text.UI.Wpf" Version="16.4.280" />
+    <PackageReference Include="System.ComponentModel.Composition" Version="4.7.0" />
   </ItemGroup>
 
   <ItemGroup>
@@ -17,6 +14,7 @@
     <AddinReference Include="MonoDevelop.DotNetCore" />
     <AddinReference Include="MonoDevelop.PackageManagement" />
     <AddinReference Include="MonoDevelop.TextEditor" />
+    <AddinReference Include="MonoDevelop.TextEditor.Cocoa" />
     <AddinReference Include="MonoDevelop.Refactoring" />
   </ItemGroup>
 </Project>
