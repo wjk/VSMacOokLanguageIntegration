@@ -28,7 +28,7 @@ namespace VSLTK.Intellisense
         #region Asset Imports
 
         [Import]
-        internal IQuickInfoBroker QuickInfoBroker { get; set; }
+        internal IAsyncQuickInfoBroker QuickInfoBroker { get; set; }
 
         #endregion
 

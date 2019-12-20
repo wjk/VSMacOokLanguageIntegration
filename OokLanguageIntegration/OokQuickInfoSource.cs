@@ -19,22 +19,24 @@ using Microsoft.VisualStudio.Text;
 using Microsoft.VisualStudio.Text.Tagging;
 using System.ComponentModel.Composition;
 using Microsoft.VisualStudio.Utilities;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace OokLanguage
 {
     /// <summary>
     /// Factory for quick info sources
     /// </summary>
-    [Export(typeof(IQuickInfoSourceProvider))]
+    [Export(typeof(IAsyncQuickInfoSourceProvider))]
     [ContentType("ook!")]
     [Name("ookQuickInfo")]
-    class OokQuickInfoSourceProvider : IQuickInfoSourceProvider
+    class OokQuickInfoSourceProvider : IAsyncQuickInfoSourceProvider
     {
 
         [Import]
         IBufferTagAggregatorFactoryService aggService = null;
 
-        public IQuickInfoSource TryCreateQuickInfoSource(ITextBuffer textBuffer)
+        public IAsyncQuickInfoSource TryCreateQuickInfoSource(ITextBuffer textBuffer)
         {
             return new OokQuickInfoSource(textBuffer, aggService.CreateTagAggregator<OokTokenTag>(textBuffer));
         }
@@ -43,7 +45,7 @@ namespace OokLanguage
     /// <summary>
     /// Provides QuickInfo information to be displayed in a text buffer
     /// </summary>
-    class OokQuickInfoSource : IQuickInfoSource
+    class OokQuickInfoSource : IAsyncQuickInfoSource
     {
         private ITagAggregator<OokTokenTag> _aggregator;
         private ITextBuffer _buffer;
@@ -59,36 +61,43 @@ namespace OokLanguage
         /// <summary>
         /// Determine which pieces of Quickinfo content should be displayed
         /// </summary>
-        public void AugmentQuickInfoSession(IQuickInfoSession session, IList<object> quickInfoContent, out ITrackingSpan applicableToSpan)
+        public async Task<QuickInfoItem> GetQuickInfoItemAsync(IAsyncQuickInfoSession session, CancellationToken cancellationToken)
         {
-            applicableToSpan = null;
-
             if (_disposed)
                 throw new ObjectDisposedException("TestQuickInfoSource");
 
+            ITrackingSpan applicableToSpan;
             var triggerPoint = (SnapshotPoint) session.GetTriggerPoint(_buffer.CurrentSnapshot);
 
             foreach (IMappingTagSpan<OokTokenTag> curTag in _aggregator.GetTags(new SnapshotSpan(triggerPoint, triggerPoint)))
             {
+                if (cancellationToken.IsCancellationRequested)
+                    throw new OperationCanceledException();
+
                 if (curTag.Tag.type == OokTokenTypes.OokExclamation)
                 {
                     var tagSpan = curTag.Span.GetSpans(_buffer).First();
                     applicableToSpan = _buffer.CurrentSnapshot.CreateTrackingSpan(tagSpan, SpanTrackingMode.EdgeExclusive);
-                    quickInfoContent.Add("Exclaimed Ook!");
+                    return new QuickInfoItem(applicableToSpan, "Exclaimed Ook!");
                 }
-                else if (curTag.Tag.type == OokTokenTypes.OokQuestion)
+
+                if (curTag.Tag.type == OokTokenTypes.OokQuestion)
                 {
                     var tagSpan = curTag.Span.GetSpans(_buffer).First();
                     applicableToSpan = _buffer.CurrentSnapshot.CreateTrackingSpan(tagSpan, SpanTrackingMode.EdgeExclusive);
-                    quickInfoContent.Add("Question Ook?");
+                    return new QuickInfoItem(applicableToSpan, "Question Ook?");
                 }
-                else if (curTag.Tag.type == OokTokenTypes.OokPeriod)
+
+                if (curTag.Tag.type == OokTokenTypes.OokPeriod)
                 {
                     var tagSpan = curTag.Span.GetSpans(_buffer).First();
                     applicableToSpan = _buffer.CurrentSnapshot.CreateTrackingSpan(tagSpan, SpanTrackingMode.EdgeExclusive);
-                    quickInfoContent.Add("Regular Ook.");
+                    return new QuickInfoItem(applicableToSpan, "Regular Ook.");
                 }
             }
+
+            await Task.Yield(); // to silence C# compiler warning
+            return null;
         }
 
         public void Dispose()

@@ -29,8 +29,6 @@ namespace VSLTK.Intellisense
         private IList<ITextBuffer> _subjectBuffers;
         private TemplateQuickInfoControllerProvider _componentContext;
 
-        private IQuickInfoSession _session;
-
         #endregion
 
         #region Constructors
@@ -85,8 +83,7 @@ namespace VSLTK.Intellisense
 
                 if (!_componentContext.QuickInfoBroker.IsQuickInfoActive(_textView))
                 {
-                    _session = _componentContext.QuickInfoBroker.CreateQuickInfoSession(_textView, triggerPoint, true);
-                    _session.Start();
+                    _componentContext.QuickInfoBroker.TriggerQuickInfoAsync(_textView, triggerPoint);
                 }
             }
         }
